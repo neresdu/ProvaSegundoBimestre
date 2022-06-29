@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Component
 public class QueueConsumer {
 
-    @RabbitListener(queues = {"${queue.name}"})
+    @RabbitListener(queues = {"${queue.name}"}, autoStartup = "false", ackMode = "NONE")
     public void receive(@Payload Message message) throws BusinessException {
         System.out.println("Message " + message + "  " + LocalDateTime.now());
         String ultima = String.valueOf(message.getHeaders().get("ultima"));
